@@ -18,14 +18,9 @@ module pooler(
 
     wire [7:0] data_in_temp;
     assign data_in_temp = data_in ;
-    /*reg  [7:0] mux_out_temp;
-    always @(posedge clk ) begin
-      mux_out_temp <= mux_out;
-    end
-    */
+
     wire temp_rst;
-    //parameter m = 9'h00c;
-    //parameter p = 9'h003;
+
     parameter delay = 3;
     assign temp_rst = master_rst;
     control_logic2  control0(
@@ -57,10 +52,8 @@ module pooler(
     reg [7:0] temp;
     
     shifter_row #(delay) shift3 (
-      //.clk(clk),    // input wire CLK
-      //.A((m/p)-4),  // input wire [7 : 0] A
-      //.A(0),  // input wire [7 : 0] A
-      .in(comp_op),  // input wire [7 : 0] D
+
+      .in(comp_op), 
       .CE(load_sr), // input wire CE
       .rst(global_rst||temp_rst),  // input wire SCLR
       .shift_out(shift_out)         // output wire [7 : 0] Q
